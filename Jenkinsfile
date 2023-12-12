@@ -12,7 +12,7 @@ pipeline {
     }
 
     environment {
-        TOMCAT_URL_DEV = 'http://localhost:8090'
+        TOMCAT_URL_DEV = 'localhost:8090'
         TOMCAT_USER = 'tomcat'
         TOMCAT_PW = 'tomcat'
         CONTEXT_PATH = '/webapp'
@@ -42,7 +42,6 @@ pipeline {
                     steps {
                         // def warFile = bat(script: 'dir /B /S target\\*.war', returnStatus: true).trim()
                         // powershell "Invoke-RestMethod -Uri \"${TOMCAT_URL_DEV}/manager/text/deploy?path=${CONTEXT_PATH}\" -Method Put -InFile \"${warFile}\" -Credential (Get-Credential -UserName ${TOMCAT_USER} -Password ${TOMCAT_PW})"
-                        bat 'cd'
                         // powershell "Invoke-RestMethod -Uri \"${TOMCAT_URL_DEV}/manager/text/deploy?path=${CONTEXT_PATH}\" -Method Put -InFile \"**/target/*.war\" -Credential (Get-Credential -UserName ${TOMCAT_USER} -Password ${TOMCAT_PW})"
                     
                     
