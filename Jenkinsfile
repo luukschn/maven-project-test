@@ -13,6 +13,7 @@ pipeline {
 
     environment {
         TOMCAT_URL_DEV = 'localhost:8090'
+        TOMCAT_URL_PROD = 'localhost:9090'
         TOMCAT_USER = 'tomcat'
         TOMCAT_PW = 'tomcat'
         CONTEXT_PATH = '/webapp'
@@ -38,6 +39,8 @@ pipeline {
 
         stage('Deployments') {
             parallel {
+                //NOTE: uses file transfers locally. not a very good way.
+
                 stage('Deploy to Staging') {
                     steps {
                         // def warFile = bat(script: 'dir /B /S target\\*.war', returnStatus: true).trim()
@@ -55,6 +58,14 @@ pipeline {
                     
                         //redeploy uploaded file
                         bat "curl -v --user ${TOMCAT_USER}:${TOMCAT_PW} ${TOMCAT_URL_DEV}/manager/text/reload?path=${CONTEXT_PATH}"
+                    }
+                }
+
+                stage('Deploy to Prodction') {
+                    steps {
+                        bat 'xcopy /Y C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\FullyAutomated\\webapp\\target\\webapp.war "C:/Users/luuks/Documents/Programming/jenkins_prac/apache-tomcat-10.1.16-prod/apache-tomcat-10.1.16/webapps"'
+
+                        bat "curl -v --user ${TOMCAT_USER}:${TOMCAT_PW} ${TOMCAT_URL_PROD}/manager/text/reload?path=${CONTEXT_PATH}"
                     }
                 }
             }
