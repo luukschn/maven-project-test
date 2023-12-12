@@ -45,9 +45,13 @@ pipeline {
                         // powershell "Invoke-RestMethod -Uri \"${TOMCAT_URL_DEV}/manager/text/deploy?path=${CONTEXT_PATH}\" -Method Put -InFile \"**/target/*.war\" -Credential (Get-Credential -UserName ${TOMCAT_USER} -Password ${TOMCAT_PW})"
                     
                     
-                        bat "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 22 **/target/*.war ${TOMCAT_USER}@${TOMCAT_URL_DEV}/manager"
+                        // bat "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 22 **/target/*.war ${TOMCAT_USER}@${TOMCAT_URL_DEV}/manager"
 
-                        bat "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 ${TOMCAT_USER}@${TOMCAT_URL_DEV} '${TOMCAT_MANAGER_PATH}/deploy?path=/your-app'"
+                        // bat "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 ${TOMCAT_USER}@${TOMCAT_URL_DEV} '${TOMCAT_MANAGER_PATH}/deploy?path=/your-app'"
+
+
+                        //not so great way to do this
+                        bat 'xcopy **/target/*.war C:/Users/luuks/Documents/Programming/jenkins_prac/apache-tomcat-10.1.16-staging/apache-tomcat-10.1.16/webapps'
                     }
                 }
             }
