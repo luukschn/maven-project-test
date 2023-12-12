@@ -52,6 +52,9 @@ pipeline {
 
                         //not so great way to do this - absolute paths
                         bat 'xcopy /Y C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\FullyAutomated\\webapp\\target\\webapp.war "C:/Users/luuks/Documents/Programming/jenkins_prac/apache-tomcat-10.1.16-staging/apache-tomcat-10.1.16/webapps"'
+                    
+                        //redeploy uploaded file
+                        bat "curl -v --user ${TOMCAT_USER}:${TOMCAT_PW} ${TOMCAT_URL_DEV}/manager/text/reload?path=${CONTEXT_PATH}"
                     }
                 }
             }
