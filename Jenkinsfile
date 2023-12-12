@@ -50,8 +50,8 @@ pipeline {
                         // bat "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 ${TOMCAT_USER}@${TOMCAT_URL_DEV} '${TOMCAT_MANAGER_PATH}/deploy?path=/your-app'"
 
 
-                        //not so great way to do this
-                        bat 'xcopy /Y .\\target\\*.war "C:/Users/luuks/Documents/Programming/jenkins_prac/apache-tomcat-10.1.16-staging/apache-tomcat-10.1.16/webapps"'
+                        //not so great way to do this - absolute path
+                        bat 'xcopy /Y .\\target\\webapp.war "C:/Users/luuks/Documents/Programming/jenkins_prac/apache-tomcat-10.1.16-staging/apache-tomcat-10.1.16/webapps"'
                     }
                 }
             }
