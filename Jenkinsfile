@@ -41,7 +41,8 @@ pipeline {
                 stage('Deploy to Staging') {
                     steps {
                         // def warFile = bat(script: 'dir /B /S target\\*.war', returnStatus: true).trim()
-                        powershell "Invoke-RestMethod -Uri \"${TOMCAT_URL_DEV}/manager/text/deploy?path=${CONTEXT_PATH}\" -Method Put -InFile \"${warFile}\" -Credential (Get-Credential -UserName ${TOMCAT_USER} -Password ${TOMCAT_PW})"
+                        // powershell "Invoke-RestMethod -Uri \"${TOMCAT_URL_DEV}/manager/text/deploy?path=${CONTEXT_PATH}\" -Method Put -InFile \"${warFile}\" -Credential (Get-Credential -UserName ${TOMCAT_USER} -Password ${TOMCAT_PW})"
+                        powershell "Invoke-RestMethod -Uri \"${TOMCAT_URL_DEV}/manager/text/deploy?path=${CONTEXT_PATH}\" -Method Put -InFile \"**/target/*.war\" -Credential (Get-Credential -UserName ${TOMCAT_USER} -Password ${TOMCAT_PW})"
                     }
                 }
             }
