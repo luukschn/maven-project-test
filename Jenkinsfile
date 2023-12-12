@@ -46,7 +46,7 @@ pipeline {
                         // powershell "Invoke-RestMethod -Uri \"${TOMCAT_URL_DEV}/manager/text/deploy?path=${CONTEXT_PATH}\" -Method Put -InFile \"**/target/*.war\" -Credential (Get-Credential -UserName ${TOMCAT_USER} -Password ${TOMCAT_PW})"
                     
                     
-                        bat "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 22 **/target/*.war ${TOMCAT_USER}@${TOMCAT_URL_DEV}:/manager"
+                        bat "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 22 **/target/*.war ${TOMCAT_USER}@${TOMCAT_URL_DEV}/manager"
 
                         bat "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p 22 ${TOMCAT_USER}@${TOMCAT_URL_DEV} '${TOMCAT_MANAGER_PATH}/deploy?path=/your-app'"
                     }
