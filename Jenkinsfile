@@ -7,6 +7,10 @@ pipeline {
     // }
     //for deployment to running foreign server instance
 
+    tools {
+        maven 'localMaven'
+    }
+
     environment {
         TOMCAT_URL_DEV = 'http://localhost:8090'
         TOMCAT_USER = 'tomcat'
