@@ -18,9 +18,9 @@ pipeline {
         CONTEXT_PATH = '/webapp'
     }
 
-    triggers {
-        pollSCM ('* * * * *') //CHANGE so i doenst poll every minute
-    }
+    // triggers {
+    //     pollSCM ('* * * * *') //CHANGE so i doenst poll every minute
+    // }
 
     stages {
         stage('Build') {
@@ -51,7 +51,7 @@ pipeline {
 
 
                         //not so great way to do this
-                        bat 'xcopy **/target/*.war C:/Users/luuks/Documents/Programming/jenkins_prac/apache-tomcat-10.1.16-staging/apache-tomcat-10.1.16/webapps'
+                        bat 'xcopy /Y .\\target\\*.war "C:/Users/luuks/Documents/Programming/jenkins_prac/apache-tomcat-10.1.16-staging/apache-tomcat-10.1.16/webapps"'
                     }
                 }
             }
